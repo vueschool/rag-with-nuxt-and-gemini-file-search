@@ -117,7 +117,7 @@ export function useRagStore(params: {
         },
       });
 
-      const nextStoreName = response.fileSearchStoreName || "";
+      const nextStoreName = response?.name || "";
       params.storeName.value = nextStoreName;
       selectedStoreName.value = nextStoreName;
       addStoreToHistory(nextStoreName, displayName);
