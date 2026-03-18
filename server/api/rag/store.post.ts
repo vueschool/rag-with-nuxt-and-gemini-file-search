@@ -1,6 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody<{ displayName?: string }>(event);
-  const displayName = body.displayName?.trim();
+  const { displayName } = await readBody<{ displayName?: string }>(event);
 
   // TODO: create the file search store
 
