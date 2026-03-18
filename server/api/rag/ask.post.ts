@@ -21,18 +21,16 @@ export default defineEventHandler(async (event) => {
 
   return {
     answer: "This is a placeholder answer.",
-    groundingMetadata: [
-      {
-        groundingChunks: [
-          {
-            retrievedContext: {
-              title: "Untitled document",
-              text: "This is a placeholder text.",
-            },
+    groundingMetadata: {
+      groundingChunks: [
+        {
+          retrievedContext: {
+            title: "Untitled document",
+            text: "This is a placeholder text.",
           },
-        ],
-      },
-    ],
+        },
+      ],
+    },
     fileSearchStoreName: "placeholder-store-name",
   };
 });
