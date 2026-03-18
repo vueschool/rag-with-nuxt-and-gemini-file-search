@@ -50,7 +50,14 @@ async function askQuestion() {
 
     storeName.value = response.fileSearchStoreName;
     answer.value = response.answer || "No answer returned.";
-    attributions.value = response.attributions || [];
+    attributions.value =
+      response.groundingMetadata.at(0)?.groundingChunks.map((chunk) => {
+        return {
+          title: chunk.retrievedContext.title,
+          text: chunk.retrievedContext.text,
+          fileSearchStore: response.fileSearchStoreName,
+        };
+      }) || [];
     status.value = "Answer ready.";
   } catch (error: any) {
     status.value = `Question failed: ${error?.data?.statusMessage || error.message}`;

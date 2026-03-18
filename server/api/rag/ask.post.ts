@@ -21,13 +21,6 @@ export default defineEventHandler(async (event) => {
 
   return {
     answer: "This is a placeholder answer.",
-    attributions: [
-      {
-        title: "Untitled document",
-        text: "This is a placeholder attribution.",
-        fileSearchStore: "placeholder-store-name",
-      },
-    ],
     groundingMetadata: [
       {
         groundingChunks: [
@@ -40,6 +33,6 @@ export default defineEventHandler(async (event) => {
         ],
       },
     ],
-    fileSearchStore: "placeholder-store-name",
+    fileSearchStoreName: "placeholder-store-name",
   };
 });
