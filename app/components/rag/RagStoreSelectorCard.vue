@@ -32,13 +32,15 @@ const {
     <div class="row">
       <select v-model="selectedStoreName">
         <option disabled value="">Select a saved store</option>
-        <option
-          v-for="option in storeOptions"
-          :key="option.storeName"
-          :value="option.storeName"
-        >
-          {{ option.displayName }}
-        </option>
+        <ClientOnly>
+          <option
+            v-for="option in storeOptions"
+            :key="option.storeName"
+            :value="option.storeName"
+          >
+            {{ option.displayName }}
+          </option>
+        </ClientOnly>
       </select>
       <button
         type="button"
