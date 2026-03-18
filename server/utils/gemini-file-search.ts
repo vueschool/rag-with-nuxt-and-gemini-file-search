@@ -55,3 +55,34 @@ export async function uploadDocumentToStore(params: {
 
   return;
 }
+
+export async function askStore(params: {
+  fileSearchStoreName: string;
+  question: string;
+}) {
+  const ai = getGeminiClient();
+  const groundedQuestion = [
+    "Answer using only the retrieved File Search context.",
+    'If the context does not contain the answer, say: "I do not know based on the uploaded documents."',
+    `Question: ${params.question}`,
+  ].join("\n");
+
+  const response = await ai.models.generateContent({
+    model: "gemini-3-flash-preview",
+    contents: groundedQuestion,
+    config: {
+      tools: [
+        {
+          fileSearch: {
+            fileSearchStoreNames: [params.fileSearchStoreName],
+          },
+        },
+      ],
+    },
+  });
+
+  return {
+    text: response.text ?? "",
+    groundingMetadata: response.candidates?.[0]?.groundingMetadata ?? null,
+  };
+}

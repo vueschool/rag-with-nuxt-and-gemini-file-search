@@ -17,22 +17,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // TODO: ask store
+  const result = await askStore({
+    fileSearchStoreName,
+    question,
+  });
 
   return {
-    answer: "This is a placeholder answer.",
-    groundingMetadata: [
-      {
-        groundingChunks: [
-          {
-            retrievedContext: {
-              title: "Untitled document",
-              text: "This is a placeholder text.",
-            },
-          },
-        ],
-      },
-    ],
+    answer: result.text,
+    groundingMetadata: result.groundingMetadata,
     fileSearchStoreName: "placeholder-store-name",
   };
 });
