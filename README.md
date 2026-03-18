@@ -1,6 +1,6 @@
-# Nuxt Minimal Starter
+# Source Code for Course: RAG with Nuxt and Gemini File Search
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Watch the full course on VueSchool.io: [RAG with Nuxt and Gemini File Search](https://vueschool.io/courses/rag-with-nuxt-and-gemini-file-search)
 
 ## Setup
 
