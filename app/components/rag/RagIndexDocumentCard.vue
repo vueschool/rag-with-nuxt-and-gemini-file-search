@@ -70,7 +70,7 @@ async function indexDocument() {
   indexJobStatus.value = "idle";
 
   try {
-    const response = await $fetch("/api/rag", {
+    const response = await $fetch("/api/rag/index-document", {
       method: "POST",
       body: {
         content: sourceText.value,
