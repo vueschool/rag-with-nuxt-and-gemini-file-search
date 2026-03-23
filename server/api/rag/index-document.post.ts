@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const displayName = body.displayName || "Untitled document";
+  const displayName = body.displayName || createDisplayNameFromContent(content);
 
   // TODO: create the index job
   // const job = {
