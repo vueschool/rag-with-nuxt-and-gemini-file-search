@@ -9,16 +9,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // TODO: get the job status
-
-  const job = {
-    id: "placeholder-job-id",
-    status: "succeeded",
-    fileSearchStoreName: "placeholder-store-name",
-    displayName: "Placeholder document",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+  const job = await getIndexJob(jobId);
 
   if (!job) {
     throw createError({
@@ -27,7 +18,5 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return {
-    job,
-  };
+  return { job };
 });

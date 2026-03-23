@@ -23,35 +23,36 @@ export default defineEventHandler(async (event) => {
 
   const displayName = body.displayName || createDisplayNameFromContent(content);
 
-  // TODO: create the index job
-  // const job = {
-  //   id: "placeholder-job-id",
-  //   status: "pending",
-  //   fileSearchStoreName: "placeholder-store-name",
-  //   displayName,
-  //   createdAt: new Date().toISOString(),
-  //   updatedAt: new Date().toISOString(),
-  // };
-
-  // const runIndexing = async () => {
-  //   // TODO: implement the indexing logic
-  // };
-
-  // event.waitUntil(runIndexing());
-
-  // setResponseStatus(event, 202);
-
-  await uploadDocumentToStore({
+  const job = await createIndexJob({
     fileSearchStoreName,
-    content,
     displayName,
   });
+
+  const runIndexing = async () => {
+    try {
+      await uploadDocumentToStore({
+        fileSearchStoreName,
+        content,
+        displayName,
+      });
+    } catch (error) {
+      await markIndexJobFailed({
+        jobId: job.id,
+        errorMessage: (error as Error).message,
+      });
+    }
+    await markIndexJobSucceeded(job.id);
+  };
+
+  event.waitUntil(runIndexing());
+
+  setResponseStatus(event, 202);
 
   return {
     ok: true,
     accepted: true,
-    jobId: "job-id",
-    jobStatus: "succeeded",
+    jobId: job.id,
+    jobStatus: job.status,
     fileSearchStoreName,
   };
 });
