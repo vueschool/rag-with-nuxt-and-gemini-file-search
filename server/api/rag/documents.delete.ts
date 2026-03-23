@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // TODO: delete document
+  await deleteStoreDocument({ documentName });
 
   return { ok: true };
 });

@@ -109,3 +109,13 @@ export async function listStoreDocuments(params: {
 
   return result;
 }
+
+export async function deleteStoreDocument(params: { documentName: string }) {
+  const ai = getGeminiClient();
+  await ai.fileSearchStores.documents.delete({
+    name: params.documentName,
+    config: {
+      force: true,
+    },
+  });
+}
