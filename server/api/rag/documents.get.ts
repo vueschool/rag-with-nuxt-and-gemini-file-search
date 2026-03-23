@@ -9,15 +9,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // TODO: list documents
+  const documents = await listStoreDocuments({ fileSearchStoreName });
 
   return {
-    fileSearchStoreName: "placeholder-store-name",
-    documents: [
-      {
-        name: "placeholder-document-name",
-        displayName: "Placeholder document",
-      },
-    ],
+    fileSearchStoreName,
+    documents,
   };
 });

@@ -86,3 +86,26 @@ export async function askStore(params: {
     groundingMetadata: response.candidates?.[0]?.groundingMetadata ?? null,
   };
 }
+
+export async function listStoreDocuments(params: {
+  fileSearchStoreName: string;
+}) {
+  const ai = getGeminiClient();
+  const result: Array<{
+    name: string;
+    displayName: string;
+  }> = [];
+
+  const documents = await ai.fileSearchStores.documents.list({
+    parent: params.fileSearchStoreName,
+  });
+
+  for await (const document of documents) {
+    result.push({
+      name: document.name ?? "",
+      displayName: document.displayName ?? document.name ?? "Untitled document",
+    });
+  }
+
+  return result;
+}
